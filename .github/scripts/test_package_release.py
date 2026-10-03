@@ -38,10 +38,10 @@ class ReleaseTests(unittest.TestCase):
             return decide(version)
 
     def test_new_version(self):
-        self.assertEqual(self.decision(), {'version': '1.0.0', 'tag': 'upm/v1.0.0', 'create': 'true', 'publish': 'true'})
+        self.assertEqual(self.decision(), {'version': '1.0.0', 'tag': 'v1.0.0', 'create': 'true', 'publish': 'true'})
 
     def test_existing_version_and_retry(self):
-        self.git('tag', 'upm/v1.0.0')
+        self.git('tag', 'v1.0.0')
         self.assertEqual(self.decision()['publish'], 'false')
         self.write_version('1.0.1')
         self.assertEqual(self.decision()['create'], 'true')
@@ -54,7 +54,7 @@ class ReleaseTests(unittest.TestCase):
             self.decision('1.0.0')
 
     def test_mismatched_tag(self):
-        self.git('tag', 'upm/v2.0.0')
+        self.git('tag', 'v2.0.0')
         with self.assertRaises(AssertionError):
             self.decision('2.0.0')
 

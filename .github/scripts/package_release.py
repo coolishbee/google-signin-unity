@@ -41,7 +41,7 @@ def validate():
 def decide(retry_version=None):
     manifest = json.loads((PACKAGE / 'package.json').read_text())
     version = valid_version(retry_version or manifest['version'])
-    tag = 'upm/v' + version
+    tag = 'v' + version
     exists = subprocess.run(['git', 'show-ref', '--verify', '--quiet', 'refs/tags/' + tag]).returncode == 0
     if retry_version and not exists:
         raise ValueError('재시도할 태그가 없습니다.')

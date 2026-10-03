@@ -1,6 +1,6 @@
 # Google Sign-In for Unity
 
-[![OpenUPM: pending](https://img.shields.io/badge/OpenUPM-pending-yellow)](Packages/com.coolishbee.google-signin/README.md#planned-installation-after-publication)
+[![OpenUPM: pending](https://img.shields.io/badge/OpenUPM-pending-yellow)](Packages/com.coolishbee.google-signin/README.md#installation-via-git)
 [![CI](https://github.com/coolishbee/google-signin-unity/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/coolishbee/google-signin-unity/actions/workflows/release.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue)](Packages/com.coolishbee.google-signin/LICENSE)
 

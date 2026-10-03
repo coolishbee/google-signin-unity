@@ -16,14 +16,14 @@ The repository's `SampleProject/` references the package through the following r
 
 For other projects, select the local `package.json` in Package Manager and configure the dependency registry shown below. Projects importing the sample also need `com.unity.ugui`.
 
-## Planned installation after publication
+## Installation via Git
 
-The following example will be usable after the `upm/v1.0.0` tag is published. Tag publication and OpenUPM registration have not been completed.
+The following example installs the `v1.0.0` tag. OpenUPM installation requires separate package registration and publication.
 
 ```json
 {
   "dependencies": {
-    "com.coolishbee.google-signin": "https://github.com/coolishbee/google-signin-unity.git?path=Packages/com.coolishbee.google-signin#upm/v1.0.0"
+    "com.coolishbee.google-signin": "https://github.com/coolishbee/google-signin-unity.git?path=Packages/com.coolishbee.google-signin#v1.0.0"
   },
   "scopedRegistries": [
     {
@@ -120,7 +120,7 @@ Set `RequestIdToken = true` and use the returned `IdToken` to create credentials
 
 The repository root is not a Unity project. The package lives in `Packages/com.coolishbee.google-signin/`; the [sample project](https://github.com/coolishbee/google-signin-unity/tree/main/SampleProject) references it locally.
 
-Development and releases use `main`. There is no separate package-only branch. Update `package.json.version` and the changelog in a pull request when preparing a release. After merging, GitHub Actions validates the package and creates `upm/v{version}` if it does not already exist. Direct pushes to `main` use the same rules. Existing tags are never overwritten; changes without a new version do not create another release.
+Development and releases use `main`. There is no separate package-only branch. Update `package.json.version` and the changelog in a pull request when preparing a release. After merging, GitHub Actions validates the package and creates `v{version}` if it does not already exist. Direct pushes to `main` use the same rules. Existing tags are never overwritten; changes without a new version do not create another release.
 
 OpenUPM registration is a one-time prerequisite. The submission template is [here](https://github.com/coolishbee/google-signin-unity/blob/main/.github/openupm.yml). Before registration, the workflow creates the tag and reports that registration is pending. Once the package is registered, set the repository variable `OPENUPM_ENABLED` to `true`. Subsequent releases request an OpenUPM scan and wait until the version is installable. No personal access token or OpenUPM secret is required.
 
