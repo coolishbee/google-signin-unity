@@ -1,0 +1,17 @@
+# 오픈유피엠 등록 저장소에 제출할 설정입니다. 이 파일만으로 등록되지는 않습니다.
+name: com.coolishbee.google-signin
+displayName: Google Sign-In for Unity
+description: 구글 로그인 기능을 제공하는 유니티 패키지입니다.
+repoUrl: https://github.com/coolishbee/google-signin-unity
+parentRepoUrl: https://github.com/googlesamples/google-signin-unity
+licenseSpdxId: Apache-2.0
+licenseName: Apache License 2.0
+topics:
+  - utilities
+gitTagPrefix: upm/
+gitTagIgnore: ''
+minVersion: 1.0.0
+trackingMode: git
+image: ''
+readme: main:Packages/com.coolishbee.google-signin/README.md
+hunter: coolishbee

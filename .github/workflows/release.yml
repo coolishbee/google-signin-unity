@@ -1,0 +1,73 @@
+name: 패키지 검사 및 배포
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 재시도할 기존 태그의 버전 번호
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python .github/scripts/package_release.py validate
+      - run: python -m unittest discover -s .github/scripts -p 'test_*.py'
+
+  release:
+    needs: validate
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: package-release-main
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: 배포 대상 결정
+        id: release
+        env:
+          RETRY_VERSION: ${{ inputs.version }}
+        run: python .github/scripts/package_release.py decide --retry-version "$RETRY_VERSION"
+      - name: 새 버전 태그 공개
+        if: steps.release.outputs.create == 'true'
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          git tag "$RELEASE_TAG" "$GITHUB_SHA"
+          git push origin "refs/tags/$RELEASE_TAG"
+      - name: 오픈유피엠 배포 및 설치 가능 여부 확인
+        if: steps.release.outputs.publish == 'true' && vars.OPENUPM_ENABLED == 'true'
+        uses: openupm/openupm-action@89b79dc8dd6cb319efff06727f8fa0051ce7e517
+        with:
+          package: com.coolishbee.google-signin
+          tag: ${{ steps.release.outputs.tag }}
+          timeout-minutes: 15
+      - name: 등록 대기 안내
+        if: steps.release.outputs.publish == 'true' && vars.OPENUPM_ENABLED != 'true'
+        run: echo '태그는 준비되었지만 오픈유피엠 배포는 실행하지 않았습니다. 최초 등록 후 OPENUPM_ENABLED=true 설정과 기존 버전의 수동 실행이 필요합니다.' >> "$GITHUB_STEP_SUMMARY"
+      - name: 기존 버전 안내
+        if: steps.release.outputs.publish != 'true'
+        run: echo '기존 버전이므로 새 배포를 생략했습니다. 배포 재시도는 버전 번호를 지정해 수동 실행하세요.' >> "$GITHUB_STEP_SUMMARY"

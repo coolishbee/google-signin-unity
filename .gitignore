@@ -64,3 +64,6 @@ crashlytics-build.properties
 
 # Local agent instructions
 /CLAUDE.md
+
+# 배포 검사 도구의 파이썬 캐시
+/.github/scripts/__pycache__/

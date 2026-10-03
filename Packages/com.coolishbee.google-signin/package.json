@@ -25,5 +25,6 @@
             "description": "Sign-in, sign-out, and authentication result display example.",
             "path": "Samples~/SignInSample"
         }
-    ]
+    ],
+    "documentationUrl": "https://github.com/coolishbee/google-signin-unity/blob/main/Packages/com.coolishbee.google-signin/README.md"
 }
