@@ -130,4 +130,4 @@ To retry publication of an existing tag, manually run the release workflow on `m
 
 This project is a fork of [Google's original repository](https://github.com/googlesamples/google-signin-unity). Its implementation was adapted and reworked for this project's goals using [Thaina/google-signin-unity](https://github.com/Thaina/google-signin-unity) as a reference.
 
-iOS contributions include work from [this fork](https://github.com/pillsgood/google-signin-unity) and [the original contribution](https://github.com/googlesamples/google-signin-unity/pull/205#issuecomment-1724733615). Existing copyright notices and the Apache License 2.0 text are preserved in the source files and [LICENSE](LICENSE).
+Existing copyright notices and the Apache License 2.0 text are preserved in the source files and [LICENSE](LICENSE).
