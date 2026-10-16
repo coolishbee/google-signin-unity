@@ -6,16 +6,6 @@ Android uses `CredentialManager` and `AuthorizationClient`; iOS uses `GIDSignIn`
 
 The package ID is `com.coolishbee.google-signin`, version `1.0.0`. The declared minimum Unity version is `2021.3`, and the sample project targets `6000.3.18f1`. Package installation, sample import, and Editor compilation were verified with Unity `6000.3.18f1`. Unity `2021.3`, player builds, and device sign-in have not been verified.
 
-## Local installation
-
-The repository's `SampleProject/` references the package through the following relative path. It already contains the sample, so importing the sample again would create duplicate classes.
-
-```json
-"com.coolishbee.google-signin": "file:../../Packages/com.coolishbee.google-signin"
-```
-
-For other projects, select the local `package.json` in Package Manager and configure the dependency registry shown below. Projects importing the sample also need `com.unity.ugui`.
-
 ## Installation via Git
 
 The following example installs the `v1.0.0` tag. OpenUPM installation requires separate package registration and publication.

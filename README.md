@@ -6,6 +6,13 @@
 
 A Google Sign-In package for Android, iOS, the Unity Editor, and desktop players.
 
+## ScreenShot
+
+<p>
+  <img src=".github/images/android-signin-1.jpg" alt="구글 로그인 계정 선택 대화상자" width="300">
+  <img src=".github/images/android-signin-2.jpg" alt="구글 로그인 계정 선택 하단 화면" width="300">
+</p>
+
 ## Repository layout
 
 The repository root is not a Unity project.
